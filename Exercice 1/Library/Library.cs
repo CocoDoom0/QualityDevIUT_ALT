@@ -1,4 +1,5 @@
 ﻿
+using System.Text.Json;
 using Exercice_1.Classes;
 namespace Exercice_1.Library;
 
@@ -122,5 +123,17 @@ public class Library
         Console.WriteLine($"Total de médias: {totalMedia}");
         Console.WriteLine($"Total de médias empruntés: {totalMediaEmprunte}");
         Console.WriteLine($"Total de médias non empruntés: {totalMediaNonEmprunte}");
+    }
+    
+    public void ExportJson()
+    {
+        string json = JsonSerializer.Serialize(Medias);
+        File.WriteAllText("medias.json", json);
+    }
+    
+    public void ImportJson()
+    {
+        string json = File.ReadAllText("medias.json");
+        Medias = JsonSerializer.Deserialize<List<Media>>(json);
     }
 }
